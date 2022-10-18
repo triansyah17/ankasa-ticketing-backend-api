@@ -9,8 +9,6 @@ const multerUpload = multer({
     destination: (req, file, cb) => {
       if (file.fieldname === "photo") {
         cb(null, "./public/photo");
-      } else {
-        cb(null, "./public/video");
       }
     },
     filename: (req, file, cb) => {
@@ -35,16 +33,8 @@ const multerUpload = multer({
           false
         );
       }
-    } else {
-      // filter mimetype
-      if (file.mimetype === "video/mp4" || file.mimetype === "video/3gpp") {
-        cb(null, true);
-      } else {
-        cb({ message: "Video extension only can .mp4 or .3gp" }, false);
-      }
     }
   },
-  limits: { fileSize: 50000000 },
 });
 
 // middleware
@@ -52,10 +42,6 @@ module.exports = (req, res, next) => {
   const multerFields = multerUpload.fields([
     {
       name: "photo",
-      maxCount: 1,
-    },
-    {
-      name: "video",
       maxCount: 1,
     },
   ]);
