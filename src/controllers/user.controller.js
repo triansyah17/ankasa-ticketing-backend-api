@@ -3,6 +3,8 @@ const userModel = require("../models/user.model");
 const createPagination = require("../utils/createPagination");
 const { success, failed } = require("../utils/createResponse");
 const deleteFile = require("../utils/deleteFile");
+const uploadGoogleDrive = require("../utils/uploadGoogleDrive");
+const deleteGoogleDrive = require("../utils/deleteGoogleDrive");
 
 module.exports = {
   list: async (req, res) => {
@@ -90,12 +92,14 @@ module.exports = {
     try {
       const { id } = req.params;
 
-      const user = await userModel.selectById(id);
+      const user = await userModel.selectById(id.toString());
       // jika user tidak ditemukan
       if (!user.rowCount) {
         // menghapus photo jika ada
-        if (req.file) {
-          deleteFile(req.file.path);
+        if (req.files) {
+          if (req.files.photo) {
+            deleteFile(req.files.photo[0].path);
+          }
         }
 
         failed(res, {
@@ -108,15 +112,18 @@ module.exports = {
 
       // jika update user disertai photo
       let { photo } = user.rows[0];
-      if (req.file) {
-        if (user.rows[0].photo) {
+      if (req.files) {
+        if (req.files.photo) {
           // menghapus photo lama
-          deleteFile(`public/${user.rows[0].photo}`);
+          if (user.rows[0].photo) {
+            await deleteGoogleDrive(user.rows[0].photo);
+          }
+          // mendapatkan name photo baru
+          photo = await uploadGoogleDrive(req.files.photo[0]);
+          deleteFile(req.files.photo[0].path);
         }
-        // mendapatkan name photo baru
-        photo = req.file.filename;
       }
-      await userModel.updatePhoto(id, photo);
+      await userModel.updatePhoto(user.rows[0].id, photo);
 
       success(res, {
         code: 200,
