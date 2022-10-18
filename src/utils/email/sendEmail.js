@@ -19,8 +19,8 @@ const sendEmail = async (dataEmail) => {
       port: 2525,
       secure: false,
       auth: {
-        user: "9c89c85556ac99f169e9d4c48f38bb9e",
-        pass: "698cb69de21deddf10435d80a73e1bcd",
+        user: "88eae6ca45708a97807de39003b7197e",
+        pass: "842d35461bdcf9a44406e252f1cb7e09",
       },
     });
 
