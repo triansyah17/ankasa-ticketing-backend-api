@@ -5,8 +5,10 @@ const cors = require("cors");
 const { APP_NAME, NODE_ENV, PORT } = require("./src/utils/env");
 const { failed } = require("./src/utils/createResponse");
 const creditCardRoute = require("./src/router/credit_card.route");
-// const airlinesRoute = require("./src/router/airlines.route");
-// const productRoute = require("./src/router/product.route");
+const airlinesRoute = require("./src/router/airline.route");
+const productRoute = require("./src/router/product.route");
+const transactionRoute = require('./src/router/transactions.route')
+const destinationRoute = require('./src/router/destination.route')
 
 // deklarasi express
 const app = express();
@@ -22,12 +24,12 @@ app.use(express.static("public"));
 app.get("/", (req, res) =>
   res.send(`${APP_NAME} API - ${NODE_ENV[0].toUpperCase() + NODE_ENV.slice(1)}`)
 );
-// main router
 
-// app.use(airlinesRoute);
-// app.use(productRoute);
-// app.use(require("./src/router/transactions.router"));
-// app.use(require("./src/router/destination.router"));
+// main router
+app.use(airlinesRoute);
+app.use(productRoute);
+app.use(transactionRoute);
+app.use(destinationRoute);
 app.use(creditCardRoute);
 app.use(require("./src/router/auth.route"));
 app.use(require("./src/router/user.route"));
