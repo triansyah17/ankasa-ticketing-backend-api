@@ -33,7 +33,7 @@ const htmlTemplateTop = `
       max-width: 800px;
       margin: 0 auto;
       margin-bottom: 30px;
-      padding: 25px;
+      padding: 25px; 
     }
 
     .auth-button {
@@ -47,6 +47,11 @@ const htmlTemplateTop = `
       display: block;
       width: 150px;
   }
+
+  body{
+    background-image:url('../../assets/ankasa-bg.svg') !important;
+  }
+
   </style>
 
   <title>Verify Your Account!</title>
