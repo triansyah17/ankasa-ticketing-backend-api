@@ -14,7 +14,7 @@ module.exports = {
         password,
         level = 1,
         createdDate,
-        isVerified = true,
+        isVerified = false,
         photo = "",
       } = body;
 
