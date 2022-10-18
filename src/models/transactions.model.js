@@ -36,7 +36,7 @@ const transactionsModels = {
         );
     }),
     getTransactions: () => new Promise((resolve, reject) => {
-        db.query('SELECT * FROM transactions inner join products ON transactions.product_id = products.id inner join airlines on transactions.airline_id = airlines.id', (err, result) => {
+        db.query('SELECT transactions.id, transactions.is_paid, transactions.seat, transactions.total_order, transactions.user_id, transactions.passenger_name, transactions.passenger_phone, products.origin, products.destination, products.price, products.type, airlines.name, airlines.photo, airlines.pic, airlines.phone, airlines.is_active, products.stock, products.transit_total, products.flight_date, products.code, products.gate, products.terminal FROM transactions inner join products ON transactions.product_id = products.id inner join airlines on transactions.airline_id = airlines.id', (err, result) => {
             if (err) {
                 reject(err);
             }
