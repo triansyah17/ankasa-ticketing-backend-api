@@ -25,7 +25,6 @@ const corsOptions = {
 app.get("/", (req, res) =>
   res.send(`${APP_NAME} API - ${NODE_ENV[0].toUpperCase() + NODE_ENV.slice(1)}`)
 );
-// main router
 
 app.use(creditCardRoute);
 app.use(require("./src/router/auth.route"));

@@ -60,7 +60,7 @@ CREATE TABLE transactions (
     passenger_phone VARCHAR NULL,
     product_id      VARCHAR NULL, 
     airline_id      VARCHAR NULL
-)
+);
 
 CREATE TABLE airlines (
     id               VARCHAR NOT NULL PRIMARY KEY,
@@ -68,7 +68,7 @@ CREATE TABLE airlines (
     name             VARCHAR NULL, 
     pic              VARCHAR NULL, 
     phone            VARCHAR NULL,      
-    created_dat      TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,  
+    created_date      TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,  
     is_active        VARCHAR NULL
 );
 
