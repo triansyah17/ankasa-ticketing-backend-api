@@ -1,5 +1,4 @@
-
-CREATE DATABASE ankasa-flight;
+CREATE DATABASE ankasa;
 
 CREATE TABLE users (
     id              VARCHAR NOT NULL PRIMARY KEY, 
@@ -13,45 +12,46 @@ CREATE TABLE users (
     postal_code     VARCHAR NULL, 
     level           INT NULL, 
     is_verified     VARCHAR NULL, 
-    created_date    TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+    created_date    TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     token           TEXT NULL
 );
 
 CREATE TABLE products (
-    id              VARCHAR NOT NULL PRIMARY KEY,
+    id              VARCHAR NOT NULL,
     origin          VARCHAR NULL,
     destination     VARCHAR NULL,
+    price           VARCHAR NULL,
     type            VARCHAR NULL,
-    stock           VARCHAR NULL,
+    stock           INT NULL,
     transit_total   VARCHAR NULL,
     flight_date     DATE NULL,
     airline_id      VARCHAR NULL,
     estimation      VARCHAR NULL,
-    create_date     TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    created_date    TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     code            VARCHAR NULL,
     gate            VARCHAR NULL,
     terminal        VARCHAR NULL
 );
 
 CREATE TABLE credit_card (
-    id              VARCHAR NOT NULL PRIMARY KEY,
+    id              VARCHAR NOT NULL,
     number          VARCHAR NULL, 
     name            VARCHAR NULL,
     user_id         VARCHAR NULL
 );
 
 CREATE TABLE destinations (
-    id              VARCHAR NOT NULL PRIMARY KEY, 
+    id              VARCHAR NOT NULL, 
     country         VARCHAR NULL, 
     place           VARCHAR NULL, 
     image           TEXT NULL, 
     price           VARCHAR NULL, 
     total_airline   VARCHAR NULL, 
-    date            DATE WITH TIME ZONE
+    date            DATE NULL
 );
 
 CREATE TABLE transactions (
-    id              VARCHAR NOT NULL PRIMARY KEY, 
+    id              VARCHAR NOT NULL, 
     is_paid         VARCHAR NULL, 
     user_id         VARCHAR NULL, 
     seat            VARCHAR NULL, 
@@ -63,7 +63,7 @@ CREATE TABLE transactions (
 );
 
 CREATE TABLE airlines (
-    id               VARCHAR NOT NULL PRIMARY KEY,
+    id               VARCHAR NOT NULL,
     photo            TEXT NULL, 
     name             VARCHAR NULL, 
     pic              VARCHAR NULL, 
@@ -71,6 +71,3 @@ CREATE TABLE airlines (
     created_date      TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,  
     is_active        VARCHAR NULL
 );
-
--- Delete Isi Column
-TRUNCATE TABLE users RESTART IDENTITY CASCADE;

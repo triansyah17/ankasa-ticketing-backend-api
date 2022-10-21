@@ -47,13 +47,11 @@ const uploadGoogleDrive = async (file) => {
     // get gd link
     const result = await drive.files.get({
       fileId: response.data.id,
-      fields: "webViewLink, webContentLink",
+      //   fields: "webViewLink, webContentLink",
     });
 
-    return {
-      id: response.data.id,
-      gdLink: result.data.webViewLink,
-    };
+    return response.data.id;
+    //   gdLink: result.data.webViewLink,
   } catch (error) {
     console.log(error);
   }
